@@ -46,5 +46,9 @@ export default {
   data: () => ({
     //
   }),
+  async mounted(){
+    const response = await this.$http.get("pessoas")
+    console.log(response)
+  }
 };
 </script>
