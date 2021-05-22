@@ -42,7 +42,7 @@
 export default {
   data: () => ({
     drawer: false,
-    group: "Home",
+    group: "",
   }),
   watch: {
     group() {
@@ -51,6 +51,9 @@ export default {
         : "";
       this.drawer = false;
     },
+  },
+  mounted() {
+    this.group = this.$route.name;
   },
 };
 </script>

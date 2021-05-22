@@ -1,5 +1,14 @@
 <template>
-  <div >
-    <h1>This is an Admin page</h1>
+  <div>
+    <ListaPessoas />
   </div>
 </template>
+<script>
+import ListaPessoas from "@/components/Pessoas/ListaPessoas.vue";
+
+export default {
+  components: {
+    ListaPessoas,
+  },
+};
+</script>
