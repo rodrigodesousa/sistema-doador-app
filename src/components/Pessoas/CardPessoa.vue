@@ -4,9 +4,11 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-card-subtitle><strong>Nome: </strong>pessoa.nome</v-card-subtitle>
           <v-card-subtitle
-            ><strong>Email: </strong>pessoa.email</v-card-subtitle
+            ><strong>Nome: </strong>{{ pessoa.nome }}</v-card-subtitle
+          >
+          <v-card-subtitle
+            ><strong>Email: </strong>{{ pessoa.email }}</v-card-subtitle
           >
         </v-col>
       </v-row>

@@ -16,9 +16,5 @@ export default {
   components: {
     NavigationBar,
   },
-  async mounted() {
-    const response = await this.$http.get("pessoas");
-    console.log(response);
-  },
 };
 </script>
