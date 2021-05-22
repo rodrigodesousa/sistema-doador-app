@@ -16,15 +16,27 @@
     <v-card-actions>
       <v-btn color="orange" text><v-icon>mdi-pencil</v-icon> alterar </v-btn>
 
-      <v-btn color="red" text><v-icon>mdi-trash-can</v-icon> deletar </v-btn>
+      <v-btn color="red" text @click="openConfirm = true"
+        ><v-icon>mdi-trash-can</v-icon> deletar
+      </v-btn>
     </v-card-actions>
+    <ConfirmacoesPessoa
+      :open="openConfirm"
+      :pessoa="pessoa"
+      @close="openConfirm = false"
+    />
   </v-card>
 </template>
 <script>
+import ConfirmacoesPessoa from "@/components/Pessoas/ConfirmacoesPessoa";
+
 export default {
   props: ["pessoa"],
+  components: {
+    ConfirmacoesPessoa,
+  },
   data: () => ({
-    //
+    openConfirm: false,
   }),
 };
 </script>

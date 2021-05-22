@@ -55,8 +55,8 @@ export default {
   methods: {
     fecharDialog() {
       this.$emit("close");
-      this.nome = null;
-      this.email = null;
+      this.nome = "";
+      this.email = "";
       this.$refs.form.reset();
     },
     async adicionarPessoa() {
@@ -70,11 +70,11 @@ export default {
         console.log(response);
         response = await this.$http.get("pessoas");
         this.$store.dispatch("setPessoas", response.body.content);
+        this.fecharDialog();
       } catch (error) {
         console.log(error);
       } finally {
         this.loading = false;
-        this.fecharDialog();
       }
     },
   },
