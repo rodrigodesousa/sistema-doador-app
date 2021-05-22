@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="text-center">
       <v-col>
-        <v-btn color="success"
+        <v-btn color="success" @click.prevent="openFormularioPessoa = true"
           ><v-icon class="mr-2">mdi-account-plus</v-icon> adicionar</v-btn
         >
       </v-col>
@@ -12,19 +12,25 @@
         <CardPessoa :pessoa="item" />
       </v-col>
     </v-row>
+    <FormularioPessoa
+      :open="openFormularioPessoa"
+      @close="openFormularioPessoa = false"
+    />
   </v-container>
 </template>
 
 <script>
 import CardPessoa from "@/components/Pessoas/CardPessoa.vue";
+import FormularioPessoa from "@/components/Pessoas/FormularioPessoa.vue";
 
 export default {
   name: "ListaPessoas",
   components: {
     CardPessoa,
+    FormularioPessoa,
   },
   data: () => ({
-    //
+    openFormularioPessoa: false,
   }),
   computed: {
     pessoas() {
