@@ -1,18 +1,39 @@
 <template>
-  <v-container>
+  <v-container v-if="loading">
+    <v-row>
+      <v-col>
+        <v-progress-linear
+          indeterminate
+          color="blue darken-2"
+        ></v-progress-linear>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container v-else>
     <v-row v-if="$route.name == 'Admin'" class="text-center">
       <v-col>
         <v-btn color="success" @click.prevent="openFormularioUtensilio = true"
-          ><v-icon class="mr-2">mdi-account-plus</v-icon> adicionar</v-btn
+          ><v-icon class="mr-2">mdi-gift</v-icon> adicionar</v-btn
         >
       </v-col>
     </v-row>
-    <v-row class="text-center">
+    <v-row v-if="utensilios.length > 0" class="text-center">
       <v-col v-for="item in utensilios" :key="item.id" cols="12" md="4">
         <CardUtensilio :utensilio="item" />
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-else class="text-center">
+      <v-col cols="12" md="4">
+        <h2>
+          {{
+            $route.name == "Admin"
+              ? "Não há utensilios salvos"
+              : "Não há utensilios disponiveis"
+          }}
+        </h2>
+      </v-col>
+    </v-row>
+    <v-row v-if="utensilios.length > 0">
       <v-col>
         <v-pagination v-model="pagina" :length="totalPaginas"></v-pagination>
       </v-col>
@@ -37,6 +58,7 @@ export default {
   },
   data: () => ({
     openFormularioUtensilio: false,
+    loading: false,
   }),
   computed: {
     utensilios() {
@@ -51,6 +73,7 @@ export default {
       },
       async set(val) {
         try {
+          this.loading = true;
           const response =
             this.$route.name == "Admin"
               ? await this.$http.get(`utensilios?page=${val - 1}`)
@@ -58,12 +81,15 @@ export default {
           this.$store.dispatch("setUtensilios", response);
         } catch (error) {
           console.log(error);
+        } finally {
+          this.loading = false;
         }
       },
     },
   },
   async mounted() {
     try {
+      this.loading = true;
       const response =
         this.$route.name == "Admin"
           ? await this.$http.get("utensilios")
@@ -72,6 +98,8 @@ export default {
       this.$store.dispatch("setUtensilios", response);
     } catch (error) {
       console.log(error);
+    } finally {
+      this.loading = false;
     }
   },
 };

@@ -56,7 +56,7 @@ export default {
   data: () => ({
     drawer: false,
     group: "",
-    items: ["Utensilios", "Pessoas"],
+    items: ["Pessoas", "Utensilios"],
   }),
   computed: {
     tabAdmin: {

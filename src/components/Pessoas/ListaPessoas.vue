@@ -1,5 +1,15 @@
 <template>
-  <v-container>
+  <v-container v-if="loading">
+    <v-row>
+      <v-col>
+        <v-progress-linear
+          indeterminate
+          color="blue darken-2"
+        ></v-progress-linear>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container v-else>
     <v-row class="text-center">
       <v-col>
         <v-btn color="success" @click.prevent="openFormularioPessoa = true"
@@ -7,12 +17,17 @@
         >
       </v-col>
     </v-row>
-    <v-row class="text-center">
+    <v-row v-if="pessoas.length > 0" class="text-center">
       <v-col v-for="item in pessoas" :key="item.id" cols="12" md="3">
         <CardPessoa :pessoa="item" />
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-else class="text-center">
+      <v-col cols="12" md="4">
+        <h2>Não há pessoas cadastradas</h2>
+      </v-col>
+    </v-row>
+    <v-row v-if="pessoas.length > 0">
       <v-col>
         <v-pagination v-model="pagina" :length="totalPaginas"></v-pagination>
       </v-col>
@@ -37,6 +52,7 @@ export default {
   },
   data: () => ({
     openFormularioPessoa: false,
+    loading: false,
   }),
   computed: {
     pessoas() {
@@ -51,21 +67,27 @@ export default {
       },
       async set(val) {
         try {
+          this.loading = true;
           const response = await this.$http.get(`pessoas?page=${val - 1}`);
           this.$store.dispatch("setPessoas", response);
         } catch (error) {
           console.log(error);
+        } finally {
+          this.loading = false;
         }
       },
     },
   },
   async mounted() {
     try {
+      this.loading = true;
       const response = await this.$http.get("pessoas");
       console.log(response);
       this.$store.dispatch("setPessoas", response);
     } catch (error) {
       console.log(error);
+    } finally {
+      this.loading = false;
     }
   },
 };
