@@ -19,13 +19,20 @@
       </v-row>
     </v-container>
     <v-card-actions>
-      <v-btn color="orange" @click="openFormularioUtensilio = true" text
-        ><v-icon>mdi-pencil</v-icon> alterar
-      </v-btn>
+      <template v-if="$route.name == 'Admin'">
+        <v-btn color="orange" @click="openFormularioUtensilio = true" text
+          ><v-icon>mdi-pencil</v-icon> alterar
+        </v-btn>
 
-      <v-btn color="red" text @click="openConfirm = true"
-        ><v-icon>mdi-trash-can</v-icon> deletar
-      </v-btn>
+        <v-btn color="red" text @click="openConfirm = true"
+          ><v-icon>mdi-trash-can</v-icon> deletar
+        </v-btn>
+      </template>
+      <template v-else>
+        <v-btn color="success" @click="openAdquirirUtensilio = true" text
+          ><v-icon>mdi-cart</v-icon> Adquirir item
+        </v-btn>
+      </template>
     </v-card-actions>
     <ConfirmacoesUtensilio
       :open="openConfirm"
@@ -38,21 +45,29 @@
       :utensilio="utensilio"
       :modoAlterar="false"
     />
+    <AdquirirUtensilio
+      :open="openAdquirirUtensilio"
+      @close="openAdquirirUtensilio = false"
+      :utensilio="utensilio"
+    />
   </v-card>
 </template>
 <script>
 import ConfirmacoesUtensilio from "@/components/Utensilios/ConfirmacoesUtensilio";
 import FormularioUtensilio from "@/components/Utensilios/FormularioUtensilio.vue";
+import AdquirirUtensilio from "@/components/Utensilios/AdquirirUtensilio.vue";
 
 export default {
   props: ["utensilio"],
   components: {
     ConfirmacoesUtensilio,
     FormularioUtensilio,
+    AdquirirUtensilio,
   },
   data: () => ({
     openConfirm: false,
     openFormularioUtensilio: false,
+    openAdquirirUtensilio: false,
   }),
 };
 </script>

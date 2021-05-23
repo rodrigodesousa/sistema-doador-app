@@ -1,12 +1,16 @@
 <template>
-  <div >
-    <h1>This is an Home page</h1>
+  <div>
+    <ListaUtensilios />
   </div>
 </template>
 
 <script>
+import ListaUtensilios from "@/components/Utensilios/ListaUtensilios.vue";
 
 export default {
   name: "Home",
+  components: {
+    ListaUtensilios,
+  },
 };
 </script>

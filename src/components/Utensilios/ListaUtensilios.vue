@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="text-center">
+    <v-row v-if="$route.name == 'Admin'" class="text-center">
       <v-col>
         <v-btn color="success" @click.prevent="openFormularioUtensilio = true"
           ><v-icon class="mr-2">mdi-account-plus</v-icon> adicionar</v-btn
@@ -51,7 +51,10 @@ export default {
       },
       async set(val) {
         try {
-          const response = await this.$http.get(`utensilios?page=${val - 1}`);
+          const response =
+            this.$route.name == "Admin"
+              ? await this.$http.get(`utensilios?page=${val - 1}`)
+              : await this.$http.get(`utensilios/disponivel?page=${val - 1}`);
           this.$store.dispatch("setUtensilios", response);
         } catch (error) {
           console.log(error);
@@ -61,7 +64,10 @@ export default {
   },
   async mounted() {
     try {
-      const response = await this.$http.get("utensilios");
+      const response =
+        this.$route.name == "Admin"
+          ? await this.$http.get("utensilios")
+          : await this.$http.get("utensilios/disponivel");
       console.log(response);
       this.$store.dispatch("setUtensilios", response);
     } catch (error) {
