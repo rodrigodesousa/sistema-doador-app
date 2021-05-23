@@ -1,10 +1,18 @@
 <template>
   <div>
     <ListaUtensilios />
+    <v-snackbar
+      v-model="snackbar"
+      :max-width="$vuetify.breakpoint.width"
+      :timeout="0"
+      :color="corMensagem"
+      >{{ snackMessage }}</v-snackbar
+    >
   </div>
 </template>
 
 <script>
+import snackbarMixin from "@/mixins/snackbar";
 import ListaUtensilios from "@/components/Utensilios/ListaUtensilios.vue";
 
 export default {
@@ -12,5 +20,6 @@ export default {
   components: {
     ListaUtensilios,
   },
+  mixins: [snackbarMixin],
 };
 </script>

@@ -80,7 +80,15 @@ export default {
               : await this.$http.get(`utensilios/disponivel?page=${val - 1}`);
           this.$store.dispatch("setUtensilios", response);
         } catch (error) {
-          console.log(error);
+          this.$store.dispatch("setCorMensagem", "red");
+          if (error.body.msg) {
+            this.$store.dispatch("setMensagem", error.body.msg);
+          } else {
+            this.$store.dispatch(
+              "setMensagem",
+              "Houve um erro! tente novamente mais tarde"
+            );
+          }
         } finally {
           this.loading = false;
         }
@@ -97,7 +105,15 @@ export default {
       console.log(response);
       this.$store.dispatch("setUtensilios", response);
     } catch (error) {
-      console.log(error);
+      this.$store.dispatch("setCorMensagem", "red");
+      if (error.body.msg) {
+        this.$store.dispatch("setMensagem", error.body.msg);
+      } else {
+        this.$store.dispatch(
+          "setMensagem",
+          "Houve um erro! tente novamente mais tarde"
+        );
+      }
     } finally {
       this.loading = false;
     }

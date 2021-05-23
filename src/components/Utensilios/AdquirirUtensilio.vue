@@ -78,9 +78,19 @@ export default {
         console.log(response);
         response = await this.$http.get("utensilios/disponivel");
         this.$store.dispatch("setUtensilios", response);
+        this.$store.dispatch("setCorMensagem", "success");
+        this.$store.dispatch("setMensagem", "Utensilio adquirido com sucesso!");
         this.fecharDialog();
       } catch (error) {
-        console.log(error);
+        this.$store.dispatch("setCorMensagem", "red");
+        if (error.body.msg) {
+          this.$store.dispatch("setMensagem", error.body.msg);
+        } else {
+          this.$store.dispatch(
+            "setMensagem",
+            "Houve um erro! tente novamente mais tarde"
+          );
+        }
       } finally {
         this.loading = false;
       }

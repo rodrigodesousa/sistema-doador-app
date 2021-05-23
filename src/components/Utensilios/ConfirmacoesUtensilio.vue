@@ -52,9 +52,19 @@ export default {
         console.log(response);
         response = await this.$http.get("utensilios");
         this.$store.dispatch("setUtensilios", response);
+        this.$store.dispatch("setCorMensagem", "warning");
+        this.$store.dispatch("setMensagem", "Utensilio alterado com sucesso!");
         this.$emit("close");
       } catch (error) {
-        console.log(error);
+        this.$store.dispatch("setCorMensagem", "red");
+        if (error.body.msg) {
+          this.$store.dispatch("setMensagem", error.body.msg);
+        } else {
+          this.$store.dispatch(
+            "setMensagem",
+            "Houve um erro! tente novamente mais tarde"
+          );
+        }
       } finally {
         this.loading = false;
       }
@@ -68,9 +78,19 @@ export default {
         console.log(response);
         response = await this.$http.get("utensilios");
         this.$store.dispatch("setUtensilios", response);
+        this.$store.dispatch("setCorMensagem", "red");
+        this.$store.dispatch("setMensagem", "Utensilio excluida com sucesso!");
         this.$emit("close");
       } catch (error) {
-        console.log(error);
+        this.$store.dispatch("setCorMensagem", "red");
+        if (error.body.msg) {
+          this.$store.dispatch("setMensagem", error.body.msg);
+        } else {
+          this.$store.dispatch(
+            "setMensagem",
+            "Houve um erro! tente novamente mais tarde"
+          );
+        }
       } finally {
         this.loading = false;
       }

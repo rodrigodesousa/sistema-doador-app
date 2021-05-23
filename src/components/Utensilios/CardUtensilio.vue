@@ -1,5 +1,9 @@
 <template>
-  <v-card class="mx-auto" max-width="400">
+  <v-card
+    class="mx-auto"
+    max-width="400"
+    :height="$vuetify.breakpoint.smAndDown ? 'auto' : 460"
+  >
     <v-icon size="100">mdi-gift</v-icon><br />
     <v-container>
       <v-row>
