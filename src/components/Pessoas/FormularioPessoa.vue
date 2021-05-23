@@ -2,7 +2,11 @@
   <v-dialog v-model="open" @click:outside="fecharDialog()" width="500">
     <v-card>
       <v-card-title>Formulario de Pessoa</v-card-title>
-      <v-form ref="form" @submit.prevent="adicionarPessoa()" v-model="valido">
+      <v-form
+        ref="form"
+        @submit.prevent="pessoa ? confirmarAlteracao() : adicionarPessoa()"
+        v-model="valido"
+      >
         <v-container>
           <v-row>
             <v-col>
@@ -31,19 +35,32 @@
         </v-card-actions>
       </v-form>
     </v-card>
+    <ConfirmacoesPessoa
+      :open="openConfirm"
+      :pessoa="pessoaAlterada"
+      @close="fecharDialog()"
+      :modoAlterar="true"
+    />
   </v-dialog>
 </template>
 <script>
+import ConfirmacoesPessoa from "@/components/Pessoas/ConfirmacoesPessoa";
+
 export default {
-  props: ["open"],
+  props: ["open", "pessoa"],
+  components: {
+    ConfirmacoesPessoa,
+  },
   data: () => ({
+    openConfirm: false,
     loading: false,
     valido: true,
     nome: "",
+    pessoaAlterada: "",
     nomeRules: [
       (v) => !!v || "Preenchimento de nome é obrigatório",
       (v) =>
-        (v.length >= 5 && v.length <= 80) ||
+        (!!v && v.length >= 5 && v.length <= 80) ||
         "Nome deve ter entre 5 e 80 caracteres",
     ],
     email: "",
@@ -52,12 +69,21 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "Email inválido",
     ],
   }),
+  watch: {
+    open() {
+      if (this.open && this.pessoa) {
+        this.nome = this.pessoa.nome;
+        this.email = this.pessoa.email;
+      }
+    },
+  },
   methods: {
     fecharDialog() {
       this.$emit("close");
       this.nome = "";
       this.email = "";
       this.$refs.form.reset();
+      this.openConfirm = false;
     },
     async adicionarPessoa() {
       try {
@@ -76,6 +102,14 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    confirmarAlteracao() {
+      this.pessoaAlterada = {
+        id: this.pessoa.id,
+        nome: this.nome,
+        email: this.email,
+      };
+      this.openConfirm = true;
     },
   },
 };

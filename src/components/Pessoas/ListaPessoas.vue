@@ -15,6 +15,7 @@
     <FormularioPessoa
       :open="openFormularioPessoa"
       @close="openFormularioPessoa = false"
+      :pessoa="null"
     />
   </v-container>
 </template>
