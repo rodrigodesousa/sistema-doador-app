@@ -49,7 +49,6 @@ export default {
           `utensilios/${this.utensilio.id}`,
           parametros
         );
-        console.log(response);
         response = await this.$http.get("utensilios");
         this.$store.dispatch("setUtensilios", response);
         this.$store.dispatch("setCorMensagem", "warning");
@@ -75,7 +74,6 @@ export default {
         let response = await this.$http.delete(
           `utensilios/${this.utensilio.id}`
         );
-        console.log(response);
         response = await this.$http.get("utensilios");
         this.$store.dispatch("setUtensilios", response);
         this.$store.dispatch("setCorMensagem", "red");

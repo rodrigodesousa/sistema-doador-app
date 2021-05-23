@@ -75,7 +75,6 @@ export default {
           `utensilios/${this.utensilio.id}`,
           parametros
         );
-        console.log(response);
         response = await this.$http.get("utensilios/disponivel");
         this.$store.dispatch("setUtensilios", response);
         this.$store.dispatch("setCorMensagem", "success");

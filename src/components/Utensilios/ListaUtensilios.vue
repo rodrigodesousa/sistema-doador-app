@@ -102,7 +102,6 @@ export default {
         this.$route.name == "Admin"
           ? await this.$http.get("utensilios")
           : await this.$http.get("utensilios/disponivel");
-      console.log(response);
       this.$store.dispatch("setUtensilios", response);
     } catch (error) {
       this.$store.dispatch("setCorMensagem", "red");

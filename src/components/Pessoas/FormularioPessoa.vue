@@ -93,7 +93,6 @@ export default {
           email: this.email,
         };
         let response = await this.$http.post("pessoas", parametros);
-        console.log(response);
         response = await this.$http.get("pessoas");
         this.$store.dispatch("setPessoas", response);
         this.$store.dispatch("setCorMensagem", "success");

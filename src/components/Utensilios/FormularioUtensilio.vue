@@ -118,7 +118,6 @@ export default {
           pessoa: { id: this.pessoaId },
         };
         let response = await this.$http.post("utensilios", parametros);
-        console.log(response);
         response = await this.$http.get("utensilios");
         this.$store.dispatch("setUtensilios", response);
         this.$store.dispatch("setCorMensagem", "success");

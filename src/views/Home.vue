@@ -4,7 +4,7 @@
     <v-snackbar
       v-model="snackbar"
       :max-width="$vuetify.breakpoint.width"
-      :timeout="0"
+      :timeout="-1"
       :color="corMensagem"
       >{{ snackMessage }}</v-snackbar
     >

@@ -47,7 +47,6 @@ export default {
           `pessoas/${this.pessoa.id}`,
           parametros
         );
-        console.log(response);
         response = await this.$http.get("pessoas");
         this.$store.dispatch("setPessoas", response);
         this.$store.dispatch("setCorMensagem", "warning");
@@ -71,7 +70,6 @@ export default {
       try {
         this.loading = true;
         let response = await this.$http.delete(`pessoas/${this.pessoa.id}`);
-        console.log(response);
         response = await this.$http.get("pessoas");
         this.$store.dispatch("setPessoas", response);
         this.$store.dispatch("setCorMensagem", "red");

@@ -90,7 +90,6 @@ export default {
     try {
       this.loading = true;
       const response = await this.$http.get("pessoas");
-      console.log(response);
       this.$store.dispatch("setPessoas", response);
     } catch (error) {
       this.$store.dispatch("setCorMensagem", "red");
