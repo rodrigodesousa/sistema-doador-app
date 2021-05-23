@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import pessoa from "@/store/modules/pessoa.js";
+import utensilio from "@/store/modules/utensilio.js";
 
 Vue.use(Vuex);
 
@@ -25,5 +26,6 @@ export default new Vuex.Store({
   },
   modules: {
     pessoa,
+    utensilio,
   },
 });
