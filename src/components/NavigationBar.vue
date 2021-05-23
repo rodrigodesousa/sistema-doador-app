@@ -19,6 +19,13 @@
           >Admin</v-btn
         >
       </template>
+      <v-spacer></v-spacer>
+      <div
+        v-if="$route.name == 'Admin'"
+        style="width: 200px; padding-top: 20px"
+      >
+        <v-select v-model="tabAdmin" :items="items" flat dense></v-select>
+      </div>
     </v-app-bar>
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.smAndDown"
@@ -49,7 +56,18 @@ export default {
   data: () => ({
     drawer: false,
     group: "",
+    items: ["Utensilios", "Pessoas"],
   }),
+  computed: {
+    tabAdmin: {
+      get() {
+        return this.$store.getters.getTabAdmin;
+      },
+      set(val) {
+        this.$store.dispatch("setTabAdmin", val);
+      },
+    },
+  },
   watch: {
     group() {
       this.$route.name != this.group
