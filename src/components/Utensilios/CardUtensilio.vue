@@ -15,7 +15,10 @@
           <v-card-text class="pa-0 ma-0 subtitle-1">{{
             utensilio.descricao
           }}</v-card-text>
-          <v-card-text class="pa-0 ma-0 subtitle-1">
+          <v-card-text
+            v-if="$route.name == 'Admin'"
+            class="pa-0 ma-0 subtitle-1"
+          >
             <strong>Disponivel ?: </strong
             >{{ utensilio.disponivel ? "SIM" : "NÃO" }}
           </v-card-text>
