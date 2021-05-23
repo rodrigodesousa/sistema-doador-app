@@ -49,7 +49,7 @@ export default {
         );
         console.log(response);
         response = await this.$http.get("pessoas");
-        this.$store.dispatch("setPessoas", response.body.content);
+        this.$store.dispatch("setPessoas", response);
         this.$emit("close");
       } catch (error) {
         console.log(error);
@@ -63,7 +63,7 @@ export default {
         let response = await this.$http.delete(`pessoas/${this.pessoa.id}`);
         console.log(response);
         response = await this.$http.get("pessoas");
-        this.$store.dispatch("setPessoas", response.body.content);
+        this.$store.dispatch("setPessoas", response);
         this.$emit("close");
       } catch (error) {
         console.log(error);

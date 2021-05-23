@@ -1,6 +1,8 @@
 const state = {
   pessoas: [],
   pessoa: {},
+  paginaPessoas: 1,
+  totalPaginasPessoas: 1,
 };
 
 const getters = {
@@ -9,6 +11,12 @@ const getters = {
   },
   getPessoa(state) {
     return state.pessoa;
+  },
+  getPaginaPessoas(state) {
+    return state.paginaPessoas;
+  },
+  getTotalPaginasPessoas(state) {
+    return state.totalPaginasPessoas;
   },
 };
 
@@ -19,6 +27,12 @@ const mutations = {
   mSetPessoas(state, valor) {
     state.pessoas = valor;
   },
+  mSetPaginaPessoas(state, valor) {
+    state.paginaPessoas = valor;
+  },
+  mSetTotalPaginaPessoas(state, valor) {
+    state.totalPaginasPessoas = valor;
+  },
 };
 
 const actions = {
@@ -26,7 +40,9 @@ const actions = {
     context.commit("mSetPessoa", valor);
   },
   setPessoas(context, valor) {
-    context.commit("mSetPessoas", valor);
+    context.commit("mSetPessoas", valor.body.content);
+    context.commit("mSetPaginaPessoas", valor.body.number);
+    context.commit("mSetTotalPaginaPessoas", valor.body.totalPages);
   },
 };
 

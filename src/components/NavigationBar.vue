@@ -20,7 +20,13 @@
         >
       </template>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" absolute left temporary>
+    <v-navigation-drawer
+      v-if="$vuetify.breakpoint.smAndDown"
+      v-model="drawer"
+      app
+      left
+      :height="$vuetify.breakpoint.height"
+    >
       <v-list nav dense>
         <v-list-item-group
           v-model="group"

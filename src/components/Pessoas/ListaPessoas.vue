@@ -12,6 +12,11 @@
         <CardPessoa :pessoa="item" />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <v-pagination v-model="pagina" :length="totalPaginas"></v-pagination>
+      </v-col>
+    </v-row>
     <FormularioPessoa
       :open="openFormularioPessoa"
       @close="openFormularioPessoa = false"
@@ -37,12 +42,28 @@ export default {
     pessoas() {
       return this.$store.getters.getPessoas;
     },
+    totalPaginas() {
+      return this.$store.getters.getTotalPaginasPessoas;
+    },
+    pagina: {
+      get() {
+        return this.$store.getters.getPaginaPessoas + 1;
+      },
+      async set(val) {
+        try {
+          const response = await this.$http.get(`pessoas?page=${val - 1}`);
+          this.$store.dispatch("setPessoas", response);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
   },
   async mounted() {
     try {
       const response = await this.$http.get("pessoas");
       console.log(response);
-      this.$store.dispatch("setPessoas", response.body.content);
+      this.$store.dispatch("setPessoas", response);
     } catch (error) {
       console.log(error);
     }

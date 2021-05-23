@@ -95,7 +95,7 @@ export default {
         let response = await this.$http.post("pessoas", parametros);
         console.log(response);
         response = await this.$http.get("pessoas");
-        this.$store.dispatch("setPessoas", response.body.content);
+        this.$store.dispatch("setPessoas", response);
         this.fecharDialog();
       } catch (error) {
         console.log(error);
