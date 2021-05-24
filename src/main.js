@@ -8,7 +8,7 @@ import vueresource from "vue-resource";
 
 Vue.use(vueresource);
 
-Vue.http.options.root = "https://doador-api.herokuapp.com/";
+Vue.http.options.root = "https://sistema-doador-backend.herokuapp.com/";
 Vue.http.headers.common["Content-Type"] = "application/json";
 
 Vue.config.productionTip = false;
