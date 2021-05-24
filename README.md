@@ -1,24 +1,29 @@
 # doador-app
-
-## Project setup
+## Demo para testes
+```
+http://sistema-doador-app.s3-website-sa-east-1.amazonaws.com/
+```
+## Requisitos
+```
+NodeJs 12 ou LTS
+npm package manager
+Vue 2
+```
+## Para testar localmente:
+```
+Executar primeiro backend que será acessado através da porta localhost:8080
+Depois executar para front para evitar o conflito de portas
+```
+## Instalar dependencias
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+## Compilar e executar projeto
 ```
+
 npm run serve
 ```
-
-### Compiles and minifies for production
+## Compilar para producao
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
