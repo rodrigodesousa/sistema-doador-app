@@ -1,15 +1,25 @@
 <template>
-  <hello-world />
+  <div>
+    <ListaUtensilios />
+    <v-snackbar
+      v-model="snackbar"
+      :max-width="$vuetify.breakpoint.width"
+      :timeout="-1"
+      :color="corMensagem"
+      >{{ snackMessage }}</v-snackbar
+    >
+  </div>
 </template>
 
 <script>
-import HelloWorld from "../components/HelloWorld";
+import snackbarMixin from "@/mixins/snackbar";
+import ListaUtensilios from "@/components/Utensilios/ListaUtensilios.vue";
 
 export default {
   name: "Home",
-
   components: {
-    HelloWorld,
+    ListaUtensilios,
   },
+  mixins: [snackbarMixin],
 };
 </script>
